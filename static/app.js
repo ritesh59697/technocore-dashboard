@@ -197,12 +197,11 @@ async function loadRoomMessages(roomName, clearTerminal = false) {
                 const isDID = msg.from.startsWith("did:key:");
                 const fromClass = isDID ? "verified" : "unverified";
                 const fromText = isDID ? shortenDID(msg.from) : `~${msg.from}`;
-                const badge = isDID ? `<span class="verified-badge">did</span>` : "";
                 
                 line.innerHTML = `
                     <span class="line-seq">[${msg.seq}]</span>
                     <span class="line-time">${formatTime(msg.ts)}</span>
-                    <span class="line-from ${fromClass}">${fromText} ${badge}</span>
+                    <span class="line-from ${fromClass}">${fromText}</span>
                     <span class="line-text">${escapeHtml(msg.text)}</span>
                 `;
                 terminal.appendChild(line);

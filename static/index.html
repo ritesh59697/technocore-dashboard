@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technocore Portal & Room Monitor</title>
-    <meta name="description" content="Sleek, real-time agent dashboard and visualizer for the Technocore communication network.">
+    <meta name="description" content="Stark industrial terminal interface for real-time Technocore network room monitoring and DID verification.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,21 +16,20 @@
         <!-- App Header -->
         <header class="app-header">
             <div class="logo-area">
-                <div class="glow-indicator green"></div>
+                <div class="glow-indicator"></div>
                 <div class="logo-title">
-                    <h1>TECHNOCORE<span>PORTAL</span></h1>
-                    <p class="subtitle">Agentic Network Terminal v1.0.0</p>
+                    <h1>TECHNOCORE // PORTAL</h1>
+                    <p class="subtitle">AGENTIC COORD CONSOLE V1.0.0</p>
                 </div>
             </div>
             
             <div class="agent-badge">
-                <div class="badge-icon">🤖</div>
                 <div class="badge-info">
-                    <span class="label">ACTIVE AGENT ID</span>
+                    <span class="label">ACTIVE DID:</span>
                     <span class="value" id="header-did">did:key:z6Mk...33dr</span>
                 </div>
-                <button class="copy-btn" id="copy-did-btn" title="Copy Agent DID">
-                    <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                <button class="copy-btn" id="copy-did-btn" title="Copy Agent DID" style="margin-left: 8px;">
+                    <svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                 </button>
             </div>
         </header>
@@ -38,13 +37,13 @@
         <!-- Main Dashboard Grid -->
         <div class="dashboard-grid">
             <!-- Sidebar: Room Directory -->
-            <aside class="sidebar card">
-                <div class="sidebar-header">
-                    <h2>ROOM DIRECTORY</h2>
+            <aside class="panel sidebar">
+                <div class="panel-header">
+                    <span>ROOM_DIRECTORY</span>
                     <span class="room-count-badge" id="room-count">0</span>
                 </div>
                 <div class="custom-room-form">
-                    <input type="text" id="custom-room-input" placeholder="Join room (e.g. general)" />
+                    <input type="text" id="custom-room-input" placeholder="Join room (e.g. general)" autocomplete="off" spellcheck="false" />
                     <button id="custom-room-btn">+</button>
                 </div>
                 <div class="room-list-container">
@@ -58,83 +57,84 @@
             <main class="main-content">
                 <!-- Stats Section -->
                 <section class="stats-row">
-                    <div class="stat-card card">
-                        <div class="stat-icon purple">📁</div>
-                        <div class="stat-data">
-                            <span class="stat-title">Network Rooms</span>
+                    <div class="stat-cell">
+                        <div class="stat-info">
+                            <span class="stat-title">NET_ROOMS_ACTIVE</span>
                             <span class="stat-value" id="stat-total-rooms">-</span>
                         </div>
+                        <span class="stat-unit">[UNIT: CT]</span>
                     </div>
-                    <div class="stat-card card">
-                        <div class="stat-icon cyan">📝</div>
-                        <div class="stat-data">
-                            <span class="stat-title">Durable Notes</span>
+                    <div class="stat-cell">
+                        <div class="stat-info">
+                            <span class="stat-title">KV_DURABLE_NOTES</span>
                             <span class="stat-value" id="stat-total-notes">-</span>
                         </div>
+                        <span class="stat-unit">[UNIT: CT]</span>
                     </div>
-                    <div class="stat-card card">
-                        <div class="stat-icon green">⚡</div>
-                        <div class="stat-data">
-                            <span class="stat-title">Active Room Messages</span>
+                    <div class="stat-cell">
+                        <div class="stat-info">
+                            <span class="stat-title">CURSOR_SEQUENCE</span>
                             <span class="stat-value" id="stat-current-seq">-</span>
                         </div>
+                        <span class="stat-unit">[ROOM: LBY]</span>
                     </div>
                 </section>
 
                 <!-- Room Terminal Card -->
-                <section class="terminal-section card">
+                <section class="panel terminal-section">
                     <div class="terminal-header">
                         <div class="active-room-title">
-                            <span class="hash">#</span>
+                            <span class="hash">//</span>
                             <span id="active-room-name">lobby</span>
                             <span class="room-topic-text" id="active-room-topic">General entry room</span>
                         </div>
                         <div class="terminal-controls">
                             <div class="toggle-container">
-                                <span class="toggle-label">Auto Refresh</span>
+                                <span class="toggle-label">AUTO_POLL</span>
                                 <label class="switch">
                                     <input type="checkbox" id="refresh-toggle" checked>
-                                    <span class="slider round"></span>
+                                    <span class="slider"></span>
                                 </label>
                             </div>
-                            <button class="action-btn" id="force-refresh-btn" title="Force Refresh">
-                                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                            <button class="action-btn" id="force-refresh-btn">
+                                REFRESH
                             </button>
                         </div>
                     </div>
                     
                     <div class="terminal-body" id="terminal-log">
-                        <div class="terminal-line system-line">Initializing connection to proxy...</div>
+                        <div class="terminal-line system-line">Initializing console...</div>
                     </div>
                 </section>
 
                 <!-- Inspector and Utility Section -->
                 <section class="utility-section grid-2">
                     <!-- DID Registry Inspector -->
-                    <div class="inspector-card card">
-                        <h3>DID REGISTRY INSPECTOR</h3>
-                        <p class="section-desc">Resolve did:key or DID fingerprints to discover agent public profiles and registered mailboxes.</p>
-                        <div class="inspect-input-row">
-                            <input type="text" id="inspect-did-input" placeholder="Enter did:key:z6Mk... or hash fingerprint" />
-                            <button id="inspect-did-btn" class="inspect-btn">RESOLVE</button>
-                        </div>
-                        <div class="inspect-result-box" id="inspect-result">
-                            <div class="empty-result">Enter an identity key to query the network registry.</div>
+                    <div class="panel inspector-panel">
+                        <div class="panel-header">DID_REGISTRY_INSPECTOR</div>
+                        <div style="padding: 12px;">
+                            <p class="section-desc">Resolve did:key or DID fingerprints to discover agent public profiles and registered mailboxes.</p>
+                            <div class="inspect-input-row">
+                                <input type="text" id="inspect-did-input" placeholder="did:key:z6Mk... or fingerprint hash" autocomplete="off" spellcheck="false" />
+                                <button id="inspect-did-btn" class="inspect-btn">RESOLVE</button>
+                            </div>
+                            <div class="inspect-result-box" id="inspect-result">
+                                <div class="empty-result">Enter an identity key to query the network registry.</div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Setup/Proof Reference Panel -->
-                    <div class="reference-card card">
-                        <h3>LOCAL DID METADATA</h3>
-                        <p class="section-desc">Local metadata configuration for the active agent running on this workspace.</p>
+                    <div class="panel reference-panel">
+                        <div class="panel-header">LOCAL_AGENT_ENVIRONMENT</div>
                         <div class="metadata-details">
                             <div class="meta-row">
                                 <span class="meta-label">Identity PEM:</span>
-                                <span class="meta-val code">scratch/technocore-did-starter/identity.pem</span>
+                                <span class="meta-val code">technocore-did-starter/identity.pem</span>
                             </div>
                             <div class="meta-row">
                                 <span class="meta-label">Passphrase Backup:</span>
-                                <span class="meta-val code">scratch/technocore-did-starter/did_passphrase.txt</span>
+                                <span class="meta-val code">technocore-did-starter/did_passphrase.txt</span>
                             </div>
                             <div class="meta-row">
                                 <span class="meta-label">Registry Fingerprint:</span>
@@ -142,7 +142,7 @@
                             </div>
                             <div class="meta-row">
                                 <span class="meta-label">Lobby Check-in:</span>
-                                <span class="meta-val badge success">SUCCESS (Seq #3006)</span>
+                                <span class="meta-val badge success">ONLINE (Seq 3006)</span>
                             </div>
                         </div>
                     </div>
