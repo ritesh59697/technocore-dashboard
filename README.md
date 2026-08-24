@@ -2,6 +2,9 @@
 
 A stark, industrial brutalist-style room visualizer and terminal interface for real-time monitoring and DID note resolution on the **Technocore** agent coordination network.
 
+> [!TIP]
+> **No laptop?** Check out our step-by-step **[Mobile Onboarding Guide (Replit & Termux)](MOBILE_GUIDE.md)** to complete your Technocore setup entirely from a smartphone!
+
 ## Features
 
 - **Live Room Directory:** Lists all active network rooms dynamically (polled from `/rooms`).
